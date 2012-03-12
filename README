@@ -1,1 +1,19 @@
-Using pyth values from kenpom and each team's seeds, bracket-maker will generate a somewhat random NCAA March Madness bracket
+Using pyth values from kenpom and each team's seeds, bracket-maker will generate a somewhat random NCAA March Madness bracket.
+
+The expected input is the filename of a csv file containing the teams, their pyth values, and their seeds sorted by region. 
+
+--[REGION NAME 1]--
+[seed]|[team name]|[pyth]
+[seed]|[team name]|[pyth]
+[seed]|[team name]|[pyth]
+...
+--[REGION NAME 2]--
+[seed]|[team name]|[pyth]
+[seed]|[team name]|[pyth]
+[seed]|[team name]|[pyth]
+...
+
+
+
+
+Each region is expected to have 16 teams, where the winners of Region 1 and 2 play each other in round 5 (and teams from Region 3 and 4 play)
