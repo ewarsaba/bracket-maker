@@ -34,8 +34,8 @@ if len(sys.argv) != 2:
     print "usage: bracket-maker.py csv_file"
     sys.exit()
 
-bracket = {}
-
+bracket = []
+regions = []
 try:
     
     bracketReader = csv.reader(open(sys.argv[1], 'rb'), delimiter='|', quotechar='"')
@@ -47,11 +47,14 @@ try:
         # reading in new region
         if (str(row[0]).startswith("--")):
             current_region = str(row[0])
-            bracket[current_region] = [0] * 16
+            regions.append(current_region)
+            bracket.append([0] * 16)
+            print current_region
         # add new team to bracket
         else:
             team = Team(row[0], row[1], row[2])
-            bracket[current_region][team.seed - 1] = team
+            print team
+            bracket[len(regions) - 1][team.seed - 1] = team
             
 except IOError:
     print "Error reading in file " + sys.argv[1]
@@ -60,10 +63,10 @@ except IOError:
 final_four = []
 
 # simulate tournament
-for region, teams in bracket.items():
-    print region
+for r in range(0, len(bracket)):
+    print regions[r]
     
-    current_teams = teams
+    current_teams = bracket[r]
     
     # go through rounds up to final four
     for rnd in range(1, 5):
@@ -79,18 +82,16 @@ for region, teams in bracket.items():
     # add region winner to final four
     final_four.append(winners[0])
 
-finalists = final_four
-print "FINAL FOUR " 
-for rnd in range(5, 7):
-    winners = []
-    print "\n\nround " + str(rnd) + "\n\n"
-    
-    #pick winners
-    for i in range(0, len(finalists) / 2):
-        winners.append(playGame(finalists[i], finalists[len(finalists) - i - 1]))
-    
-    finalists = winners;
+print "\n\nFINAL FOUR\n\n" 
 
-print "\n\nCHAMPION: " + str(finalists[0])
+finalist1 = playGame(final_four[0], final_four[1])
+finalist2 = playGame(final_four[2], final_four[3])
+
+
+print "\n\nFINALS\n\n"
+
+champion = playGame(finalist1, finalist2)
+
+print "\n\nCHAMPION: " + str(champion)
     
     
