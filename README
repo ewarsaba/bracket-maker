@@ -18,7 +18,7 @@ Each region is expected to have 16 teams, where the winners of Region 1 and 2 pl
 
 The formula for calculating a team's adjusted seed is as follows:
 	
-	adjustedSeed = seed * (pyth^2)
+	adjustedSeed = 16/seed * (pyth^2)
 
 To determine a winner between two teams, the follow algorithm is executed:
 
